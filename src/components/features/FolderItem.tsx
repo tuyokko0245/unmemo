@@ -63,7 +63,7 @@ export function FolderItem({
       )}
       <span className="h-2 w-2 shrink-0 rounded-full" style={{ backgroundColor: folder.color }} />
       <FolderIcon size={14} className="shrink-0 text-text-secondary" />
-      <span className="flex-1 truncate text-sm font-semibold text-text-primary">{folder.name}</span>
+      <span className={`flex-1 truncate text-sm font-semibold ${isActive ? 'text-base-700' : 'text-text-primary'}`}>{folder.name}</span>
       {folder.isImportant && <span className="shrink-0 text-xs text-important-star">★</span>}
       <button
         type="button"
