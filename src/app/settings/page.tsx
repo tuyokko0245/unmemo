@@ -42,11 +42,11 @@ function SettingsContent() {
           type="button"
           aria-label="戻る"
           onClick={() => router.push('/')}
-          className="flex h-11 w-11 items-center justify-center text-text-primary"
+          className="flex h-11 w-11 items-center justify-center text-base-600"
         >
           <ChevronLeft size={20} />
         </button>
-        <span className="text-lg font-extrabold text-text-primary">設定</span>
+        <span className="text-lg font-extrabold text-base-700">設定</span>
         <div className="w-11" />
       </header>
 

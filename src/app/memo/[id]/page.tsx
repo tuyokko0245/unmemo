@@ -127,10 +127,10 @@ function MemoEditor({ memo }: { memo: Memo }) {
     <div className="mx-auto flex min-h-dvh max-w-content flex-col bg-bg-primary">
       <header className="sticky top-0 z-30" style={{ backgroundColor: resolvedColor }}>
         <div className="flex h-14 items-center justify-between px-2">
-          <IconButton icon={<ChevronLeft size={20} />} label="戻る" onClick={handleBack} />
+          <IconButton icon={<ChevronLeft size={20} className="text-base-700" />} label="戻る" onClick={handleBack} />
           <div className="flex items-center gap-1">
-            <IconButton icon={<Trash2 size={18} />} label="ゴミ箱に移動" onClick={handleTrash} />
-            <IconButton icon={<Share2 size={18} />} label="共有" onClick={handleShare} />
+            <IconButton icon={<Trash2 size={18} className="text-base-700" />} label="ゴミ箱に移動" onClick={handleTrash} />
+            <IconButton icon={<Share2 size={18} className="text-base-700" />} label="共有" onClick={handleShare} />
           </div>
         </div>
         <div className="flex items-center gap-2 overflow-x-auto px-3 pb-3 [scrollbar-width:none]">

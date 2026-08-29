@@ -51,11 +51,11 @@ function TrashContent() {
           type="button"
           aria-label="戻る"
           onClick={() => router.push('/')}
-          className="flex h-11 w-11 items-center justify-center text-text-primary"
+          className="flex h-11 w-11 items-center justify-center text-base-600"
         >
           <ChevronLeft size={20} />
         </button>
-        <span className="text-lg font-extrabold text-text-primary">ゴミ箱</span>
+        <span className="text-lg font-extrabold text-base-700">ゴミ箱</span>
         <button
           type="button"
           onClick={() => setIsEmptyConfirmOpen(true)}

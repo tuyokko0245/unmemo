@@ -47,11 +47,11 @@ function TagsContent() {
           type="button"
           aria-label="戻る"
           onClick={() => router.push('/settings')}
-          className="flex h-11 w-11 items-center justify-center text-text-primary"
+          className="flex h-11 w-11 items-center justify-center text-base-600"
         >
           <ChevronLeft size={20} />
         </button>
-        <span className="text-lg font-extrabold text-text-primary">タグ管理</span>
+        <span className="text-lg font-extrabold text-base-700">タグ管理</span>
         <button
           type="button"
           onClick={() => setEditTarget({ tag: null })}

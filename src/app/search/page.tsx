@@ -54,7 +54,7 @@ function SearchContent() {
           type="button"
           aria-label="戻る"
           onClick={() => router.push('/')}
-          className="flex h-11 w-9 shrink-0 items-center justify-center text-text-primary"
+          className="flex h-11 w-9 shrink-0 items-center justify-center text-base-600"
         >
           <ChevronLeft size={20} />
         </button>
