@@ -27,7 +27,7 @@ export function MemoCard({ memo, folderColor, tags, onClick, isDragMode, dragHan
     <button
       type="button"
       onClick={() => !isDragMode && onClick(memo.id)}
-      className={`relative flex min-h-[150px] flex-col gap-1.5 rounded-md p-3 text-left shadow-sm transition-transform ${
+      className={`relative flex w-full min-h-[150px] flex-col gap-1.5 rounded-md p-3 text-left shadow-sm transition-transform ${
         isDragMode ? 'touch-none' : 'hover:-translate-y-0.5 hover:shadow-md'
       } ${isDragging ? 'shadow-lg' : ''}`}
       style={{ backgroundColor: color, opacity: isDragging ? 0.6 : 1 }}
