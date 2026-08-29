@@ -56,6 +56,7 @@ export interface NewMemoInput {
 export async function createMemo(uid: string, input: NewMemoInput) {
   await addDoc(memosCollection(uid), {
     ...input,
+    color: null,
     order: Date.now(),
     deletedAt: null,
     createdAt: serverTimestamp(),

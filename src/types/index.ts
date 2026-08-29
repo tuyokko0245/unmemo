@@ -15,6 +15,7 @@ export interface Memo {
   id: string
   title: string
   body: string
+  color: string | null
   folderId: string | null
   tagIds: string[]
   order: number

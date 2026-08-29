@@ -20,7 +20,7 @@ function formatDate(timestampMillis: number) {
 }
 
 export function MemoCard({ memo, folderColor, tags, onClick, isDragMode, dragHandleProps, isDragging }: MemoCardProps) {
-  const color = folderColor ?? assignRandomPastel(memo.id)
+  const color = memo.color ?? folderColor ?? assignRandomPastel(memo.id)
   const updatedAtMillis = memo.updatedAt?.toMillis?.()
 
   return (

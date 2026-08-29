@@ -6,6 +6,7 @@ import { ChevronLeft, Trash2, Share2, Sparkles } from 'lucide-react'
 import { RequireAuth } from '@/components/layout/RequireAuth'
 import { IconButton } from '@/components/ui/IconButton'
 import { Button } from '@/components/ui/Button'
+import { ColorDot } from '@/components/ui/ColorDot'
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog'
 import { LoadingOverlay } from '@/components/ui/LoadingOverlay'
 import { MemoForm } from '@/components/features/MemoForm'
@@ -17,6 +18,7 @@ import { useSnackbar } from '@/hooks/useSnackbar'
 import { updateMemo, moveMemoToTrash, restoreMemoFromTrash } from '@/lib/firebase/memos'
 import { replaceTodosForMemo } from '@/lib/firebase/todos'
 import { extractTodosFromMemo } from '@/lib/ai/extractTodos'
+import { PASTEL_COLORS, assignRandomPastel } from '@/lib/constants'
 import type { Memo } from '@/types'
 
 function formatDateTime(timestampMillis: number) {
@@ -36,15 +38,20 @@ function MemoEditor({ memo }: { memo: Memo }) {
   const [body, setBody] = useState(memo.body)
   const [folderId, setFolderId] = useState(memo.folderId)
   const [tagIds, setTagIds] = useState(memo.tagIds)
+  const [color, setColor] = useState<string | null>(memo.color ?? null)
   const [isSaving, setIsSaving] = useState(false)
   const [isExtracting, setIsExtracting] = useState(false)
   const [showBackConfirm, setShowBackConfirm] = useState(false)
+
+  const folderColor = folderId ? (folders.find((f) => f.id === folderId)?.color ?? null) : null
+  const resolvedColor = color ?? folderColor ?? assignRandomPastel(memo.id)
 
   const hasChanges =
     title !== initialMemo.title ||
     body !== initialMemo.body ||
     folderId !== initialMemo.folderId ||
-    tagIds.join(',') !== initialMemo.tagIds.join(',')
+    tagIds.join(',') !== initialMemo.tagIds.join(',') ||
+    color !== (initialMemo.color ?? null)
 
   const handleBack = () => {
     if (hasChanges) {
@@ -58,7 +65,7 @@ function MemoEditor({ memo }: { memo: Memo }) {
     if (!user) return
     setIsSaving(true)
     try {
-      await updateMemo(user.uid, memo.id, { title: title.trim(), body: body.trim(), folderId, tagIds })
+      await updateMemo(user.uid, memo.id, { title: title.trim(), body: body.trim(), folderId, tagIds, color })
       showSnackbar({ message: 'メモを保存しました' })
       router.push('/')
     } finally {
@@ -118,11 +125,32 @@ function MemoEditor({ memo }: { memo: Memo }) {
 
   return (
     <div className="mx-auto flex min-h-dvh max-w-content flex-col bg-bg-primary">
-      <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-border bg-bg-primary px-2">
-        <IconButton icon={<ChevronLeft size={20} />} label="戻る" onClick={handleBack} />
-        <div className="flex items-center gap-1">
-          <IconButton icon={<Trash2 size={18} />} label="ゴミ箱に移動" onClick={handleTrash} />
-          <IconButton icon={<Share2 size={18} />} label="共有" onClick={handleShare} />
+      <header className="sticky top-0 z-30" style={{ backgroundColor: resolvedColor }}>
+        <div className="flex h-14 items-center justify-between px-2">
+          <IconButton icon={<ChevronLeft size={20} />} label="戻る" onClick={handleBack} />
+          <div className="flex items-center gap-1">
+            <IconButton icon={<Trash2 size={18} />} label="ゴミ箱に移動" onClick={handleTrash} />
+            <IconButton icon={<Share2 size={18} />} label="共有" onClick={handleShare} />
+          </div>
+        </div>
+        <div className="flex items-center gap-2 overflow-x-auto px-3 pb-3 [scrollbar-width:none]">
+          {PASTEL_COLORS.map((c) => (
+            <ColorDot
+              key={c.hex}
+              color={c.hex}
+              colorName={c.name}
+              isSelected={color === c.hex}
+              size="sm"
+              onClick={() => setColor(c.hex)}
+            />
+          ))}
+          <button
+            type="button"
+            onClick={() => setColor(null)}
+            className="shrink-0 rounded-md bg-white/40 px-2.5 py-1 text-xs font-medium text-[#2E2E2E]"
+          >
+            リセット
+          </button>
         </div>
       </header>
 
