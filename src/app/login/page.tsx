@@ -17,6 +17,7 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isGoogleBusy, setIsGoogleBusy] = useState(false)
   const [isSignUp, setIsSignUp] = useState(false)
   const [isIosPwa] = useState(() => {
     if (typeof window === 'undefined') return false
@@ -33,6 +34,8 @@ export default function LoginPage() {
   }, [loading, user, router])
 
   const handleGoogleLogin = async () => {
+    if (isGoogleBusy) return
+    setIsGoogleBusy(true)
     setError('')
     try {
       await signInWithGoogle()
@@ -47,6 +50,7 @@ export default function LoginPage() {
       } else {
         setError('Googleログインに失敗しました。もう一度お試しください')
       }
+      setIsGoogleBusy(false)
     }
   }
 
@@ -92,7 +96,8 @@ export default function LoginPage() {
           <button
             type="button"
             onClick={handleGoogleLogin}
-            className="flex h-[52px] items-center justify-center gap-2.5 rounded-md border-[1.5px] border-base-200 bg-white text-sm font-bold text-[#3C3C3C] shadow-sm"
+            disabled={isGoogleBusy}
+            className="flex h-[52px] items-center justify-center gap-2.5 rounded-md border-[1.5px] border-base-200 bg-white text-sm font-bold text-[#3C3C3C] shadow-sm disabled:opacity-50"
           >
             <svg width="18" height="18" viewBox="0 0 18 18">
               <path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.9c1.7-1.57 2.7-3.87 2.7-6.62z" />
