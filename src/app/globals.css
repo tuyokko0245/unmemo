@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+/* ── デザイントークン ライトモード ───────────────────────── */
+:root {
+  --base-50:  #F0FBF6;
+  --base-100: #D6F5E7;
+  --base-200: #A8E6CF;
+  --base-300: #7AD4B4;
+  --base-400: #4DC29A;
+  --base-500: #2AAF82;
+  --base-600: #1F9469;
+  --base-700: #176B4D;
+
+  --bg-primary:   #FFFFFF;
+  --bg-secondary: #F7F9FB;
+  --bg-card:      #FFFFFF;
+
+  --text-primary:   #1A1A2E;
+  --text-secondary: #6B7280;
+  --text-tertiary:  #9CA3AF;
+
+  --border:       #E5E7EB;
+  --border-focus: var(--base-400);
+
+  --error:   #EF4444;
+  --success: var(--base-500);
+  --warning: #F59E0B;
+  --overlay: rgba(0, 0, 0, 0.5);
+  --important-star: #FBBF24;
+}
+
+/* ── ダークモード（システム設定） ───────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg-primary:   #0F1117;
+    --bg-secondary: #1A1D27;
+    --bg-card:      #1E2130;
+
+    --text-primary:   #F3F4F6;
+    --text-secondary: #9CA3AF;
+    --text-tertiary:  #6B7280;
+
+    --border:       #2D3143;
+    --border-focus: var(--base-300);
+
+    --error:   #F87171;
+    --success: var(--base-400);
+    --warning: #FBBF24;
+    --overlay: rgba(0, 0, 0, 0.7);
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg-primary:   #0F1117;
+  --bg-secondary: #1A1D27;
+  --bg-card:      #1E2130;
+
+  --text-primary:   #F3F4F6;
+  --text-secondary: #9CA3AF;
+  --text-tertiary:  #6B7280;
+
+  --border:       #2D3143;
+  --border-focus: var(--base-300);
+
+  --error:   #F87171;
+  --success: var(--base-400);
+  --warning: #FBBF24;
+  --overlay: rgba(0, 0, 0, 0.7);
+}
+
+/* ── Tailwind v4 テーマ定義 ─────────────────────────────── */
+@theme inline {
+  --font-base: var(--font-mplus);
+
+  --color-base-50:  var(--base-50);
+  --color-base-100: var(--base-100);
+  --color-base-200: var(--base-200);
+  --color-base-300: var(--base-300);
+  --color-base-400: var(--base-400);
+  --color-base-500: var(--base-500);
+  --color-base-600: var(--base-600);
+  --color-base-700: var(--base-700);
+
+  --color-bg-primary:   var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-card:      var(--bg-card);
+
+  --color-text-primary:   var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary:  var(--text-tertiary);
+
+  --color-border:       var(--border);
+  --color-border-focus: var(--border-focus);
+
+  --color-error:   var(--error);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-overlay: var(--overlay);
+  --color-important-star: var(--important-star);
+
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-full: 9999px;
+
+  --shadow-sm:   0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md:   0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-lg:   0 8px 24px rgba(0, 0, 0, 0.16);
+  --shadow-drag: 0 12px 32px rgba(0, 0, 0, 0.24);
+}
+
+@utility max-w-content {
+  max-width: 1440px;
+}
+
+@utility min-h-touch {
+  min-height: 44px;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-mplus, "M PLUS Rounded 1c", -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", sans-serif);
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── 動きを減らす設定への対応 ───────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
