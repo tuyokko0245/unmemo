@@ -87,7 +87,7 @@ export default function LoginPage() {
 
         {isIosPwa ? (
           <div className="rounded-md border border-base-200 bg-base-50 p-4 text-sm text-text-secondary leading-relaxed">
-            <p className="font-bold text-text-primary mb-1">Googleアカウントでログインする場合</p>
+            <p className="font-bold text-base-700 mb-1">Googleアカウントでログインする場合</p>
             iPhoneのホーム画面アプリではGoogleログインをご利用いただけません。
             メールアドレスでのログイン・登録をご利用ください。
             （SafariブラウザからはGoogleログインが使えます）
