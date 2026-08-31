@@ -11,7 +11,7 @@ import { useAuth } from '@/hooks/useAuth'
 import { useSnackbar } from '@/hooks/useSnackbar'
 import { createMemo } from '@/lib/firebase/memos'
 
-export function QuickInputArea() {
+export function QuickInputArea({ defaultFolderId = null }: { defaultFolderId?: string | null }) {
   const { user } = useAuth()
   const { folders } = useFolders()
   const { tags } = useTags()
@@ -19,7 +19,7 @@ export function QuickInputArea() {
 
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
-  const [folderId, setFolderId] = useState<string | null>(null)
+  const [folderId, setFolderId] = useState<string | null>(defaultFolderId)
   const [tagIds, setTagIds] = useState<string[]>([])
   const [isFolderSheetOpen, setIsFolderSheetOpen] = useState(false)
   const [isTagSheetOpen, setIsTagSheetOpen] = useState(false)

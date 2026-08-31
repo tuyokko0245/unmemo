@@ -55,7 +55,10 @@ function HomeContent() {
         else router.push(`/?folder=${folderId}`)
       }}
     >
-      <QuickInputArea />
+      <QuickInputArea
+        key={folderParam ?? 'all'}
+        defaultFolderId={activeFolderId === undefined ? null : activeFolderId}
+      />
       <SortControl
         sortKey={sortKey}
         sortOrder={sortOrder}
