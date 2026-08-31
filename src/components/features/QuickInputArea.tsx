@@ -46,7 +46,10 @@ export function QuickInputArea({ defaultFolderId = null }: { defaultFolderId?: s
 
   return (
     <div className="sticky top-0 z-10 px-4 pb-2 pt-3">
-      <div className="rounded-xl bg-base-100 p-4 shadow-md">
+      <div
+        className="rounded-xl p-4 shadow-md transition-colors duration-200"
+        style={{ backgroundColor: selectedFolder?.color ?? 'var(--color-base-100)' }}
+      >
         <input
           ref={titleRef}
           type="text"
