@@ -46,10 +46,7 @@ export function QuickInputArea({ defaultFolderId = null }: { defaultFolderId?: s
 
   return (
     <div className="sticky top-0 z-10 px-4 pb-2 pt-3">
-      <div
-        className="rounded-xl bg-base-100 p-4 shadow-md"
-        style={selectedFolder ? ({ '--base-100': selectedFolder.color } as React.CSSProperties) : undefined}
-      >
+      <div className="rounded-xl bg-base-100 p-4 shadow-md">
         <input
           ref={titleRef}
           type="text"
