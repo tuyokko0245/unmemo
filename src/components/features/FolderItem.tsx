@@ -9,6 +9,7 @@ interface FolderItemProps {
   isActive: boolean
   isExpanded: boolean
   hasChildren: boolean
+  isNestTarget?: boolean
   onSelect: () => void
   onToggleExpand: () => void
   onMenuOpen: (folderId: string) => void
@@ -21,6 +22,7 @@ export function FolderItem({
   isActive,
   isExpanded,
   hasChildren,
+  isNestTarget = false,
   onSelect,
   onToggleExpand,
   onMenuOpen,
@@ -31,7 +33,7 @@ export function FolderItem({
       role="treeitem"
       aria-selected={isActive}
       aria-expanded={hasChildren ? isExpanded : undefined}
-      className={`flex min-h-touch cursor-pointer items-center gap-1 pr-4 ${isActive ? 'bg-base-100' : ''}`}
+      className={`flex min-h-touch cursor-pointer items-center gap-1 pr-4 transition-colors ${isNestTarget ? 'rounded-md outline outline-2 outline-base-400 bg-base-50' : isActive ? 'bg-base-100' : ''}`}
       style={{ paddingLeft: 8 + depth * 20 }}
       onClick={onSelect}
     >

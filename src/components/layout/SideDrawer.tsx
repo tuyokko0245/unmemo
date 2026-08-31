@@ -43,21 +43,27 @@ export function SideDrawer({ isOpen, onClose, activeFolderId, onFolderSelect }: 
     onClose()
   }
 
-  const handleSaveFolder = async (data: { name: string; color: string; isImportant: boolean }) => {
+  const handleSaveFolder = async (data: { name: string; color: string; isImportant: boolean; parentId: string | null }) => {
     if (!user) return
     if (editTarget?.folder) {
-      await updateFolder(user.uid, editTarget.folder.id, data)
+      await updateFolder(user.uid, editTarget.folder.id, { name: data.name, color: data.color, isImportant: data.isImportant, parentId: data.parentId })
       showSnackbar({ message: 'フォルダを更新しました' })
     } else {
       const order = Date.now()
       await createFolder(user.uid, {
         name: data.name,
         color: data.color,
-        parentId: editTarget?.parentId ?? null,
+        parentId: data.parentId,
         order,
       })
       showSnackbar({ message: 'フォルダを作成しました' })
     }
+  }
+
+  const handleNest = async (folderId: string, newParentId: string) => {
+    if (!user) return
+    await updateFolder(user.uid, folderId, { parentId: newParentId })
+    showSnackbar({ message: 'フォルダを移動しました' })
   }
 
   const handleDelete = async () => {
@@ -99,6 +105,7 @@ export function SideDrawer({ isOpen, onClose, activeFolderId, onFolderSelect }: 
                 onFolderSelect={handleSelect}
                 onMenuOpen={setMenuFolderId}
                 onReorder={handleReorder}
+                onNest={handleNest}
               />
               <div className="mx-4 my-2 h-px bg-base-100" />
             </>
@@ -111,6 +118,7 @@ export function SideDrawer({ isOpen, onClose, activeFolderId, onFolderSelect }: 
             onFolderSelect={handleSelect}
             onMenuOpen={setMenuFolderId}
             onReorder={handleReorder}
+            onNest={handleNest}
           />
 
           <div
@@ -199,6 +207,7 @@ export function SideDrawer({ isOpen, onClose, activeFolderId, onFolderSelect }: 
         isOpen={!!editTarget}
         onClose={() => setEditTarget(null)}
         folder={editTarget?.folder ?? null}
+        allFolders={folders}
         onSave={handleSaveFolder}
       />
 
