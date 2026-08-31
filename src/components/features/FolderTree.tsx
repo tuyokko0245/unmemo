@@ -35,7 +35,7 @@ function getDescendantIds(folderId: string, allFolders: Folder[]): Set<string> {
 interface FolderTreeProps {
   folders: Folder[]
   allFolders: Folder[]
-  activeFolderId: string | null
+  activeFolderId: string | null | undefined
   onFolderSelect: (folderId: string | null) => void
   onMenuOpen: (folderId: string) => void
   onReorder: (reordered: Folder[]) => void
@@ -58,7 +58,7 @@ function SortableFolderNode({
   folder: Folder
   depth: number
   allFolders: Folder[]
-  activeFolderId: string | null
+  activeFolderId: string | null | undefined
   onFolderSelect: (folderId: string | null) => void
   onMenuOpen: (folderId: string) => void
   onReorder: (reordered: Folder[]) => void

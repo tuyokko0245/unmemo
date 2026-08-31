@@ -17,8 +17,8 @@ import type { Folder } from '@/types'
 interface SideDrawerProps {
   isOpen: boolean
   onClose: () => void
-  activeFolderId: string | null
-  onFolderSelect: (folderId: string | null) => void
+  activeFolderId: string | null | undefined
+  onFolderSelect: (folderId: string | null | undefined) => void
 }
 
 export function SideDrawer({ isOpen, onClose, activeFolderId, onFolderSelect }: SideDrawerProps) {
@@ -38,7 +38,7 @@ export function SideDrawer({ isOpen, onClose, activeFolderId, onFolderSelect }: 
   const regularRootFolders = folders.filter((f) => !f.isImportant && f.parentId === null)
   const menuFolder = folders.find((f) => f.id === menuFolderId) ?? null
 
-  const handleSelect = (folderId: string | null) => {
+  const handleSelect = (folderId: string | null | undefined) => {
     onFolderSelect(folderId)
     onClose()
   }
@@ -95,6 +95,14 @@ export function SideDrawer({ isOpen, onClose, activeFolderId, onFolderSelect }: 
         </div>
 
         <div className="flex-1 overflow-y-auto py-2">
+          <div
+            className={`flex min-h-touch cursor-pointer items-center gap-2 px-4 ${activeFolderId === undefined ? 'text-base-600 font-extrabold' : 'text-text-primary font-semibold'}`}
+            onClick={() => handleSelect(undefined)}
+          >
+            <FileText size={14} className="text-text-secondary" />
+            <span className="text-sm">すべてのメモ</span>
+          </div>
+
           {importantFolders.length > 0 && (
             <>
               <div className="px-4 pb-1 pt-2 text-[11px] font-extrabold text-base-500">★ 重要</div>

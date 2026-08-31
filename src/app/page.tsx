@@ -48,10 +48,10 @@ function HomeContent() {
   return (
     <AppLayout
       headerTitle={headerTitle}
-      activeFolderId={activeFolderId ?? null}
+      activeFolderId={activeFolderId}
       onFolderSelect={(folderId) => {
-        if (folderId === null) router.push('/?folder=none')
-        else if (folderId === undefined) router.push('/')
+        if (folderId === undefined) router.push('/')
+        else if (folderId === null) router.push('/?folder=none')
         else router.push(`/?folder=${folderId}`)
       }}
     >

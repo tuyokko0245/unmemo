@@ -7,8 +7,8 @@ import { SideDrawer } from './SideDrawer'
 
 interface AppLayoutProps {
   headerTitle?: string
-  activeFolderId: string | null
-  onFolderSelect: (folderId: string | null) => void
+  activeFolderId: string | null | undefined
+  onFolderSelect: (folderId: string | null | undefined) => void
   children: ReactNode
 }
 
