@@ -26,7 +26,7 @@ export function QuickInputArea({ defaultFolderId = null }: { defaultFolderId?: s
   const [isSaving, setIsSaving] = useState(false)
   const titleRef = useRef<HTMLInputElement>(null)
 
-  const folderName = folders.find((f) => f.id === folderId)?.name ?? 'フォルダ選択'
+  const selectedFolder = folders.find((f) => f.id === folderId)
 
   const handleSave = async () => {
     if (!user || (!title.trim() && !body.trim())) return
@@ -71,7 +71,15 @@ export function QuickInputArea({ defaultFolderId = null }: { defaultFolderId?: s
             onClick={() => setIsFolderSheetOpen(true)}
             className="flex items-center gap-1 rounded-md bg-bg-primary px-2.5 py-2 text-xs font-bold text-base-700"
           >
-            <FolderIcon size={13} /> {folderName}
+            <FolderIcon size={13} />
+            {selectedFolder ? (
+              <>
+                <span className="h-2 w-2 rounded-full" style={{ backgroundColor: selectedFolder.color }} />
+                {selectedFolder.name}
+              </>
+            ) : (
+              'フォルダ選択'
+            )}
           </button>
           <button
             type="button"
